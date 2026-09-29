@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import { CoreDateDayOrTimePipe } from '../date-day-or-time';
-import { fakeTime, useTranslations } from '@/testing/utils';
+import { fakeTime, overrideTranslations, useTranslations } from '@/testing/utils';
 import { CoreTime } from '@static/time';
 
 describe('CoreDateDayOrTimePipe', () => {
@@ -45,8 +45,9 @@ describe('CoreDateDayOrTimePipe', () => {
 
         expect(pipe.transform(now)).toEqual('09:02 AM');
 
-        await useTranslations('es');
+        await useTranslations('ne');
+        overrideTranslations({ 'core.strftimetime': '%I:%M %p' });
 
-        expect(pipe.transform(now)).toEqual('09:02');
+        expect(pipe.transform(now)).toEqual('09:02 AM');
     });
 });

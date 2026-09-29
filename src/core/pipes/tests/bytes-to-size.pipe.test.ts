@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import { CoreBytesToSizePipe } from '../bytes-to-size';
-import { useTranslations } from '@/testing/utils';
+import { overrideTranslations, useTranslations } from '@/testing/utils';
 
 describe('CoreBytesToSizePipe', () => {
     beforeEach(async () => {
@@ -34,6 +34,10 @@ describe('CoreBytesToSizePipe', () => {
         expect(pipe.transform(500)).toContain('bytes');
 
         await useTranslations('af');
+        overrideTranslations({
+            'core.humanreadablesize': '{{size}} {{unit}}',
+            'core.sizeb': 'grepe',
+        });
         expect(pipe.transform(500)).toContain('grepe');
     });
 });

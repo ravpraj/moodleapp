@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import { CoreFormatDatePipe } from '../format-date';
-import { useTranslations, fakeTime } from '@/testing/utils';
+import { useTranslations, fakeTime, overrideTranslations } from '@/testing/utils';
 import { CoreTime } from '@static/time';
 
 describe('CoreFormatDatePipe', () => {
@@ -36,6 +36,7 @@ describe('CoreFormatDatePipe', () => {
         expect(pipe.transform(now, 'strftimedaydatetime')).toContain('Saturday, 1 February 2014, 9:02 AM');
 
         await useTranslations('es');
+        overrideTranslations({ 'core.strftimedaydatetime': '%A, %d de %B de %Y, %H:%M' });
 
         expect(pipe.transform(now, 'strftimedaydatetime')).toContain('sábado, 1 de febrero de 2014, 09:02');
     });

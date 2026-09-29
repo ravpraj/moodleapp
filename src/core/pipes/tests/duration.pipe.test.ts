@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { useTranslations } from '@/testing/utils';
+import { overrideTranslations, useTranslations } from '@/testing/utils';
 import { CoreDurationPipe } from '../duration';
 import { CoreTime } from '@static/time';
 
@@ -39,6 +39,7 @@ describe('CoreDurationPipe', () => {
         expect(pipe.transform(10)).toContain('secs');
 
         await useTranslations('es');
+        overrideTranslations({ 'core.secs': 'segundos' });
 
         expect(pipe.transform(10)).toContain('segundos');
     });

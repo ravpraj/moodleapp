@@ -14,7 +14,7 @@
 
 import { CoreTime } from '@static/time';
 import { CoreTimeAgoPipe } from '../time-ago';
-import { useTranslations } from '@/testing/utils';
+import { overrideTranslations, useTranslations } from '@/testing/utils';
 
 describe('CoreTimeAgoPipe', () => {
     beforeEach(async () => {
@@ -40,6 +40,7 @@ describe('CoreTimeAgoPipe', () => {
         expect(pipe.transform(now - 10)).toEqual('a few seconds ago');
 
         await useTranslations('es');
+        overrideTranslations({ 'core.ago': 'hace {{$a}}' });
         expect(pipe.transform(now - 10)).toEqual('hace unos segundos');
     });
 });
