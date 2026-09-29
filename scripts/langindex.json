@@ -1700,6 +1700,7 @@
   "core.courses.categories": "moodle",
   "core.courses.completeenrolmentbrowser": "local_moodlemobileapp",
   "core.courses.courses": "moodle",
+   "core.courses.allcourses": "local_moodlemobileapp",
   "core.courses.downloadcourses": "local_moodlemobileapp",
   "core.courses.enrolme": "enrol",
   "core.courses.errorloadcategories": "local_moodlemobileapp",
