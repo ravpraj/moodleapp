@@ -43,6 +43,13 @@ function copy_lang {
     jq --indent 2 -r "$query" "$langfilepath" > /tmp/moodle-langtmp.json
     mv /tmp/moodle-langtmp.json "$langfilepath"
 
+    CUSTOM_TRANSLATIONS="../src/addons/custommoyle/translations/${lang//_/-}.json"
+
+    if [ -f "$CUSTOM_TRANSLATIONS" ]; then
+        jq -s '.[0] * .[1]' "$langfilepath" "$CUSTOM_TRANSLATIONS" > /tmp/moodle-langtmp.json
+        mv /tmp/moodle-langtmp.json "$langfilepath"
+    fi
+
     name=$(jq -r .\""$lang"\".name "$LANGPACKS_PATH"/languages.json)
     local=$(jq -r .\""$lang"\".local "$LANGPACKS_PATH"/languages.json)
     translated=$(jq -r '. | length' "$langfilepath")
