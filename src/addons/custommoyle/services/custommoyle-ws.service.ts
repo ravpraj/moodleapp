@@ -37,7 +37,6 @@ export interface CustomMoyleAnnouncement {
     imageurl: string;
 }
 
-
 export interface CustomMoyleAnnouncementDetail {
     id: number;
     title: string;
@@ -108,7 +107,6 @@ export class CustomMoyleWSService {
 
         return data as CustomMoyleAnnouncement[];
     }
-
 
     async getAnnouncement(id: number): Promise<CustomMoyleAnnouncementDetail> {
 
