@@ -37,7 +37,7 @@ import {
 export class AddonNotificationsMainMenuHandlerService implements CoreMainMenuHandler {
 
     name = ADDONS_NOTIFICATIONS_COMPONENT_NAME;
-    priority = 600;
+    priority = 800;
 
     protected handlerData: CoreMainMenuPageNavHandlerData = {
         icon: 'fas-bell',

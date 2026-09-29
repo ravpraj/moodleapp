@@ -1,0 +1,59 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            {{ 'addon.custommoyle.learningresources' | translate }}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-refresher
+        slot="fixed"
+        (ionRefresh)="loadResources($event.target)">
+
+        <ion-refresher-content></ion-refresher-content>
+
+    </ion-refresher>
+
+    <ion-list>
+
+        <ion-item
+            *ngFor="let resource of resources"
+            button
+            detail="true"
+            (click)="downloadResource(resource)">
+
+            <ion-icon
+                slot="start"
+                name="document-outline">
+            </ion-icon>
+
+            <ion-label>
+
+                <h2>
+                    {{ resource.displayname }}
+                </h2>
+
+                <p>
+                    {{ resource.filename }}
+                    ·
+                    {{ resource.filesize }}
+                </p>
+
+            </ion-label>
+
+        </ion-item>
+
+    </ion-list>
+
+    <ion-item
+        *ngIf="!loading && !resources.length">
+
+        <ion-label>
+            No learning resources found.
+        </ion-label>
+
+    </ion-item>
+
+</ion-content>

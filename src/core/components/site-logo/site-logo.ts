@@ -23,6 +23,7 @@ import { CoreConstants } from '@/core/constants';
 import { CoreBaseModule } from '@/core/base.module';
 import { CoreExternalContentDirective } from '@directives/external-content';
 import { CoreFormatTextDirective } from '@directives/format-text';
+import { CoreLang } from '@services/lang';
 
 /**
  * Component to render the current site logo.
@@ -141,7 +142,12 @@ export class CoreSiteLogoComponent implements OnInit, OnDestroy {
      */
     protected async loadInfo(site: CoreSite | CoreUnauthenticatedSite): Promise<void> {
         const siteName = await site.getSiteName();
-        this.siteName.set(siteName || '');
+        const lang = await CoreLang.getCurrentLanguage();
+        const translatedSiteName = lang
+            ? await CoreLang.getMessage('addon.custommoyle.sitename', lang)
+            : undefined;
+
+        this.siteName.set(translatedSiteName || siteName || '');
 
         if (!this.showLogo() || (this.logoType() === CoreSiteLogoType.TOP && site.getShowTopLogo(this.siteConfig()) === 'hidden')) {
             return;

@@ -109,8 +109,8 @@ export class CoreMainMenuProvider {
             } else {
                 numElements = Math.floor(window.innerWidth / MAIN_MENU_ITEM_MIN_WIDTH);
 
-                // Set a maximum elements to show and skip more button.
-                numElements = numElements >= 5 ? 5 : numElements;
+                // Leave room for five handlers and the More button.
+                numElements = numElements >= 6 ? 6 : numElements;
             }
 
             // Set a mínimum elements to show and skip more button.

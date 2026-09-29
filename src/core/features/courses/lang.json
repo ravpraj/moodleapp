@@ -4,6 +4,7 @@
     "aria:coursename": "Course name",
     "aria:courseprogress": "Course progress:",
     "aria:favourite": "Course is starred",
+    "allcourses": "All courses",
     "availablecourses": "Available courses",
     "browserenrolinstructions": "We will take you to your device's browser. Once you have completed your enrolment, please come back to this app.",
     "cannotretrievemorecategories": "Categories deeper than level {{$a}} cannot be retrieved.",

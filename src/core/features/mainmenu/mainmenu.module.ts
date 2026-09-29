@@ -19,7 +19,7 @@ import { authGuard } from '@features/mainmenu/guards/auth';
 import { AppRoutingModule } from '@/app/app-routing.module';
 
 import { CoreMainMenuDelegate } from './services/mainmenu-delegate';
-import { CoreMainMenuHomeHandler } from './services/handlers/mainmenu';
+import { CoreMainMenuLearningResourcesHandler } from './services/handlers/learning-resources-mainmenu';
 
 /**
  * Get main menu services.
@@ -85,7 +85,7 @@ const appRoutes: Routes = [
     imports: [AppRoutingModule.forChild(appRoutes)],
     providers: [
         provideAppInitializer(() => {
-            CoreMainMenuDelegate.registerHandler(CoreMainMenuHomeHandler.instance);
+            CoreMainMenuDelegate.registerHandler(CoreMainMenuLearningResourcesHandler.instance);
         }),
     ],
 })

@@ -1,5 +1,5 @@
 {
-    "app_id": "com.moodle.moodlemobile",
+    "app_id": "com.moyle.moodlemobile",
     "appname": "MOYLE App",
     "versioncode": 53000,
     "versionname": "5.3.0",
@@ -9,6 +9,7 @@
     "cache_update_frequency_rarely": 43200000,
     "default_lang": "en",
     "languages": {
+        "en": "English",
         "ne": "नेपाली"
     },
     "wsservice": "moodle_mobile_app",
@@ -31,8 +32,12 @@
         "high": 120
     },
     "customurlscheme": "moodlemobile",
-    "sites": [],
-    "siteurl": "https://test.bakhariya360.com",
+    "sites": [
+        {
+            "name": "LnE-LMS",
+            "url": "https://test.bakhariya360.com"
+        }
+    ],
     "multisitesdisplay": "",
     "sitefindersettings": {},
     "onlyallowlistedsites": false,
@@ -45,8 +50,8 @@
     "showTopLogo": "hidden",
     "ioswebviewscheme": "moodleappfs",
     "appstores": {
-        "android": "com.moodle.moodlemobile",
-        "ios": "id633359593"
+        "android": "com.moyle.moodlemobile",
+        "ios": ""
     },
     "wsrequestqueuelimit": 10,
     "wsrequestqueuedelay": 100,
@@ -80,5 +85,6 @@
         }
     },
     "clearIABSessionWhenAutoLogin": "android",
-    "collapsibleItemsExpanded": false
+    "collapsibleItemsExpanded": false,
+    "disabledFeatures": "CoreUserDelegate_AddonPrivateFiles,CoreUserDelegate_CoreGrades,CoreUserDelegate_AddonBadges:account,CoreUserDelegate_AddonBlog:account,NoDelegate_SwitchAccount,CoreReportBuilderDelegate"
 }

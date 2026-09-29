@@ -22,6 +22,7 @@ import { CoreMainMenuTabRoutingModule } from '@features/mainmenu/mainmenu-tab-ro
 import { CoreMainMenuHomeRoutingModule } from '@features/mainmenu/mainmenu-home-routing.module';
 import { CoreMainMenuHomeDelegate } from '@features/mainmenu/services/home-delegate';
 import { CoreMainMenuDelegate } from '@features/mainmenu/services/mainmenu-delegate';
+import { CoreCoursesAllCoursesMainMenuHandler } from './services/handlers/all-courses-mainmenu';
 import { CorePushNotificationsDelegate } from '@features/pushnotifications/services/push-delegate';
 import { CoreRemindersPushNotificationData } from '@features/reminders/services/reminders';
 import { CoreLocalNotifications } from '@services/local-notifications';
@@ -123,6 +124,7 @@ const routes: Routes = [
     ],
     providers: [
         provideAppInitializer(() => {
+            CoreMainMenuDelegate.registerHandler(CoreCoursesAllCoursesMainMenuHandler.instance);
             CoreMainMenuHomeDelegate.registerHandler(CoreDashboardHomeHandler.instance);
             CoreMainMenuDelegate.registerHandler(CoreCoursesMyCoursesHomeHandler.instance);
             CoreContentLinksDelegate.registerHandler(CoreCoursesCourseLinkHandler.instance);

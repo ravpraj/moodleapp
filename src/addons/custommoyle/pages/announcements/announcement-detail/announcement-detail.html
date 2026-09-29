@@ -1,0 +1,40 @@
+<ion-header>
+    <ion-toolbar>
+
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+
+        <ion-title>
+            {{ announcement?.title }}
+        </ion-title>
+
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+    <ng-container *ngIf="announcement">
+
+        <img
+            *ngIf="announcement.imageurl"
+            [src]="announcement.imageurl"
+            [alt]="announcement.title"
+            class="announcement-image">
+
+        <h1>
+            {{ announcement.title }}
+        </h1>
+
+        <div class="announcement-date">
+            {{ announcement.timepublish * 1000 | date:'medium' }}
+        </div>
+
+        <div
+            class="announcement-content"
+            [innerHTML]="announcement.description">
+        </div>
+
+    </ng-container>
+
+</ion-content>
