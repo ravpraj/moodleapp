@@ -1,4 +1,4 @@
-name: Test iOS IPA Build
+name: Build iOS IPA
 
 on:
   workflow_dispatch:
@@ -23,35 +23,51 @@ jobs:
       - name: Build Moodle App
         run: npm run build:prod
 
-      - name: Prepare iOS
-        run: npx cordova prepare ios
+      - name: Add iOS platform
+        run: npx cordova platform add ios
 
-      - name: Build iOS
+      - name: Show iOS project
+        run: |
+          echo "iOS files:"
+          ls -la platforms/ios
+
+          echo "Workspaces:"
+          find platforms/ios -name "*.xcworkspace" -print
+
+          echo "Projects:"
+          find platforms/ios -name "*.xcodeproj" -print
+
+      - name: Build unsigned iOS app
         run: |
           xcodebuild \
             -workspace platforms/ios/*.xcworkspace \
-            -scheme "Moodle" \
+            -scheme "moodleappfs" \
             -configuration Release \
             -sdk iphoneos \
             -derivedDataPath build/derived \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO
 
-      - name: Package IPA
+      - name: Create IPA
         run: |
           APP_PATH=$(find build/derived/Build/Products -name "*.app" -type d | head -1)
 
-          echo "Found app:"
+          echo "Application found:"
           echo "$APP_PATH"
+
+          if [ -z "$APP_PATH" ]; then
+            echo "ERROR: No .app file was produced"
+            exit 1
+          fi
 
           mkdir -p build/Payload
           cp -R "$APP_PATH" build/Payload/
 
           cd build
-          zip -r Moodle.ipa Payload
+          zip -r MoodleApp.ipa Payload
 
       - name: Upload IPA
         uses: actions/upload-artifact@v4
         with:
-          name: Moodle-iOS-IPA
-          path: build/Moodle.ipa
+          name: MoodleApp-iOS-unsigned
+          path: build/MoodleApp.ipa
