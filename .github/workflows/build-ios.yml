@@ -1,0 +1,57 @@
+name: Test iOS IPA Build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-ios:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Moodle App
+        run: npm run build:prod
+
+      - name: Prepare iOS
+        run: npx cordova prepare ios
+
+      - name: Build iOS
+        run: |
+          xcodebuild \
+            -workspace platforms/ios/*.xcworkspace \
+            -scheme "Moodle" \
+            -configuration Release \
+            -sdk iphoneos \
+            -derivedDataPath build/derived \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO
+
+      - name: Package IPA
+        run: |
+          APP_PATH=$(find build/derived/Build/Products -name "*.app" -type d | head -1)
+
+          echo "Found app:"
+          echo "$APP_PATH"
+
+          mkdir -p build/Payload
+          cp -R "$APP_PATH" build/Payload/
+
+          cd build
+          zip -r Moodle.ipa Payload
+
+      - name: Upload IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: Moodle-iOS-IPA
+          path: build/Moodle.ipa
